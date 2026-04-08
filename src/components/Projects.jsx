@@ -50,7 +50,7 @@ const projects = [
     features: ["Motion-first UI", "Component storytelling", "Performance-focused sections", "Responsive layout"],
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
-    live: "https://ahmedrafi.me/",
+    live: "https://ahmed-rafi07.github.io/-My-portfolio/",
     github: "https://github.com/Ahmed-Rafi07/-My-portfolio"
   },
   {

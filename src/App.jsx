@@ -277,24 +277,114 @@ function ScrollSection({ id, className = "", children }) {
 }
 
 function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const closeMenu = () => setMobileOpen(false);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md">
-      <div className="mx-auto flex w-[min(1120px,92vw)] items-center justify-between py-4">
-        <a
-          href="#home"
-          className="bg-gradient-to-r from-[#8f84ff] via-[#5ad2ff] to-[#8f84ff] bg-[length:160%_100%] bg-clip-text text-xl font-bold text-transparent"
-        >
-          Rafi.dev
-        </a>
-        <nav className="hidden items-center gap-7 text-sm font-medium text-white/80 md:flex">
-          {navItems.map((item) => (
-            <a key={item.label} href={item.href} className="transition hover:text-white">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </header>
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-gradient-to-r from-[#0b1022]/85 to-[#0b1022]/55 backdrop-blur-xl">
+        <div className="mx-auto flex w-[min(1120px,92vw)] items-center justify-between py-4">
+          <a
+            href="#home"
+            className="bg-gradient-to-r from-[#8f84ff] via-[#5ad2ff] to-[#8f84ff] bg-[length:160%_100%] bg-clip-text text-xl font-bold text-transparent"
+          >
+            Rafi.dev
+          </a>
+
+          <nav className="hidden items-center gap-7 text-sm font-medium text-white/80 md:flex">
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} className="transition hover:text-white">
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/5 text-white md:hidden"
+          >
+            <span className="relative block h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 h-[2px] w-5 rounded bg-white transition ${
+                  mobileOpen ? "translate-y-[7px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[7px] h-[2px] w-5 rounded bg-white transition ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[14px] h-[2px] w-5 rounded bg-white transition ${
+                  mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close menu backdrop"
+              onClick={closeMenu}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[55] bg-black/45 backdrop-blur-sm md:hidden"
+            />
+
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed right-0 top-0 z-[60] h-full w-[78%] border-l border-white/10 bg-[#0b0f1a] px-6 py-6 shadow-[0_0_45px_rgba(0,0,0,0.5)] md:hidden"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <p className="text-lg font-semibold text-white">Menu</p>
+                <button
+                  type="button"
+                  onClick={closeMenu}
+                  aria-label="Close mobile menu"
+                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-xl text-white"
+                >
+                  ×
+                </button>
+              </div>
+
+              <nav className="flex flex-col gap-3">
+                {navItems.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={closeMenu}
+                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base font-medium text-white/90 transition hover:border-[#5ad2ff]/35 hover:bg-[#5ad2ff]/10"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
