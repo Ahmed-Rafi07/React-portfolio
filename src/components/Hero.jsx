@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const words = ["React", "Node", "MongoDB", "UI/UX"];
+const words = [
+  "React",
+  "Node.js",
+  "MongoDB",
+  "Python",
+  "NumPy",
+  "Pandas",
+  "Data Science"
+];
 
 function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -43,13 +51,17 @@ function Hero() {
         >
           <p className="eyebrow">Available for internship and freelance</p>
           <h1>
-            Hi, I&apos;m Rafi <span className="wave">👋</span>
-          </h1>
-          <h2>Full Stack Developer</h2>
-          <p className="typing-line">
-            <span className="typing-prefix">Stack:</span> {typedText}
-            <span className="cursor">|</span>
-          </p>
+          Hi, I&apos;m Ahmed Rafi <span className="wave">👋</span>
+        </h1>
+
+        <h2>Full-Stack Developer & Data Science Enthusiast</h2>
+
+        <p className="hero-description">
+          I&apos;m Ahmed Rafi, a student and aspiring Full-Stack Developer
+          focused on building modern web applications with React, JavaScript,
+          Node.js, Express.js, and MongoDB, while exploring Data Science with
+          Python, NumPy, Pandas, data analysis, machine learning, and AI.
+        </p>
 
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">
@@ -71,7 +83,7 @@ function Hero() {
           <img
             className="hero-image"
             src="https://api.dicebear.com/9.x/notionists/svg?seed=Rafi"
-            alt="Portrait avatar of Rafi"
+            alt="Ahmed Rafi - Full-Stack Developer and Data Science enthusiast"
           />
         </motion.div>
       </div>
